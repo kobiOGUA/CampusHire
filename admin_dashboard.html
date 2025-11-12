@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Dashboard | CampusHire</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="admin_dashboard.html" class="navbar-brand">CampusHire</a>
+      <ul class="navbar-menu">
+        <li class="navbar-item"><a href="admin_dashboard.html" class="active">Dashboard</a></li>
+        <li class="navbar-item"><a href="admin_manage_users.html">Manage Users</a></li>
+        <li class="navbar-item"><a href="admin_manage_jobs.html">Manage Jobs</a></li>
+        <li class="navbar-item"><a href="admin_reports.html">Reports</a></li>
+      </ul>
+      <div class="navbar-right">
+        <div class="navbar-profile">
+          <span id="navAdminName">Admin</span>
+        </div>
+        <button id="navLogoutBtn" class="navbar-logout-btn">Logout</button>
+      </div>
+    </div>
+  </nav>
+  <div class="dashboard-container">
+    <h1>Admin Dashboard</h1>
+    <p class="small">Welcome, <span id="adminName">Admin</span> (<span id="adminEmail"></span>)</p>
+
+    <div class="stats">
+      <div class="card">
+        <span>Students</span>
+        <b id="studentCount">0</b>
+      </div>
+      <div class="card">
+        <span>Recruiters</span>
+        <b id="recruiterCount">0</b>
+      </div>
+      <div class="card">
+        <span>Jobs Posted</span>
+        <b id="jobCount">0</b>
+      </div>
+      <div class="card">
+        <span>Applications</span>
+        <b id="applicationCount">0</b>
+      </div>
+    </div>
+
+    <div class="dashboard-section">
+      <h3>Quick Management</h3>
+      <div class="btn-group">
+        <button onclick="window.location.href='admin_manage_users.html'">Manage Users</button>
+        <button onclick="window.location.href='admin_manage_jobs.html'">Manage Jobs</button>
+        <button onclick="window.location.href='admin_reports.html'">View Reports</button>
+      </div>
+    </div>
+
+    <div class="dashboard-section">
+      <h3>Recent Activity</h3>
+      <div id="recentActivity">
+        <p class="small">Loading recent activity...</p>
+      </div>
+    </div>
+
+    <div class="dashboard-section">
+      <h3>System Status</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+        <div style="padding: 12px; background: #f0f9ff; border-radius: 6px; border-left: 4px solid #0b6cff;">
+          <b style="color: #0b6cff;">Database</b>
+          <p style="margin: 4px 0; color: #666; font-size: 0.9rem;">Connected</p>
+        </div>
+        <div style="padding: 12px; background: #f0fdf4; border-radius: 6px; border-left: 4px solid #22c55e;">
+          <b style="color: #22c55e;">Authentication</b>
+          <p style="margin: 4px 0; color: #666; font-size: 0.9rem;">Active</p>
+        </div>
+        <div style="padding: 12px; background: #fef3c7; border-radius: 6px; border-left: 4px solid #f59e0b;">
+          <b style="color: #f59e0b;">API Status</b>
+          <p style="margin: 4px 0; color: #666; font-size: 0.9rem;">Operational</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-section">
+      <h3>Platform Insights</h3>
+      <div id="platformInsights">
+        <p class="small">Loading insights...</p>
+      </div>
+    </div>
+
+    <div class="center" style="margin-top: 20px; margin-bottom: 20px;">
+    </div>
+  </div>
+
+  <script src="js/navbar-toggle.js"></script>
+  <script type="module" src="js/admin_dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+/* ==============================
+   INDEX PAGE STYLES
+   Landing page hero layout with game-like intro
+   ============================== */
+
+#animated-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 36px 12px;
+}
+
+.hero-inner {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo/Title intro animation */
+.hero-text {
+  flex: 1;
+  min-width: 260px;
+  text-align: center;
+  animation: logoReveal 1s ease-out, slideUpFade 1s ease-out 0.3s both;
+}
+
+.hero-text h1 {
+  margin-top: 0;
+  color: var(--primary-600);
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  animation: titlePulse 0.6s ease-out 0.5s both;
+  text-shadow: 0 4px 20px rgba(11, 108, 255, 0.15);
+}
+
+.hero-text .subtitle {
+  color: var(--primary-600);
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  animation: slideUpFade 0.8s ease-out 0.8s both;
+  opacity: 0;
+}
+
+.hero-text .tag {
+  color: var(--muted);
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 1.05rem;
+  animation: slideUpFade 0.8s ease-out 0.9s both;
+  opacity: 0;
+}
+
+/* Action buttons - compact and centered */
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: center;
+  animation: slideUpFade 0.8s ease-out 1s both;
+  opacity: 0;
+}
+
+.hero-actions button {
+  min-width: 120px;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+}
+
+.hero-actions button.secondary {
+  background: var(--primary-light);
+  color: var(--primary-600);
+  border: 2px solid var(--primary);
+  font-weight: 600;
+}
+
+.hero-actions button.secondary:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Info section - slides in last */
+.hero-info {
+  width: 100%;
+  max-width: 600px;
+  background: var(--card);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  animation: slideUpFade 0.8s ease-out 1.2s both;
+  opacity: 0;
+}
+
+.hero-info h3 {
+  margin-top: 0;
+  color: var(--primary-600);
+  font-size: 1.3rem;
+}
+
+.hero-info p {
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+.hero-info ul {
+  margin: 12px 0;
+  padding-left: 24px;
+}
+
+.hero-info li {
+  margin-bottom: 8px;
+  color: var(--muted);
+}
+
+/* Game-like animations */
+@keyframes logoReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes titlePulse {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Glow effect on hover */
+.hero-text h1:hover {
+  animation: glow 0.6s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 4px 20px rgba(11, 108, 255, 0.15);
+  }
+  50% {
+    text-shadow: 0 8px 30px rgba(11, 108, 255, 0.3);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero-inner {
+    gap: 24px;
+  }
+  .hero {
+    min-height: auto;
+    padding: 20px;
+  }
+  .hero-text h1 {
+    font-size: 2.8rem;
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-actions button {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 12px;
+    min-height: 100vh;
+  }
+  
+  .hero-inner {
+    gap: 0;
+    justify-content: flex-start;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .hero-text {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+  
+  .hero-actions {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .hero-actions button {
+    min-width: 0;
+    flex: 1;
+  }
+  
+  .hero-info {
+    padding: 16px;
+    width: 100%;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: -60px;
+    border-radius: 12px;
+  }
+  
+  .hero-info h3 {
+    font-size: 1.1rem;
+  }
+}
+

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusHire | Job Board</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .search-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .search-filter input,
+    .search-filter select,
+    .search-filter button {
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    .job-item {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: #f9f9f9;
+    }
+
+    .job-item b {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .job-item small {
+      display: block;
+      color: #666;
+      margin-top: 3px;
+    }
+
+    .job-item button {
+      margin-top: 8px;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 6px;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    .job-item button[disabled] {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+
+    .center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Job Board</h1>
+
+    <!-- 🔍 Search + Filters -->
+    <div class="search-filter">
+      <input type="text" id="searchInput" placeholder="Search jobs or companies..." />
+      <select id="companyFilter">
+        <option value="">All Companies</option>
+      </select>
+      <select id="sortFilter">
+        <option value="recent">Most Recent</option>
+        <option value="oldest">Oldest First</option>
+      </select>
+      <button id="searchBtn">Search</button>
+    </div>
+
+    <!-- 📋 Job Results -->
+    <div id="jobList">Loading jobs...</div>
+
+    <!-- 🔙 Back -->
+    <div class="center" style="margin-top: 20px;">
+      <button id="backBtn" style="background:#007bff;">⬅️ Back to Dashboard</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/job_board.js"></script>
+</body>
+</html>

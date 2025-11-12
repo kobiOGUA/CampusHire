@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Student Dashboard | CampusHire</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="student_dashboard.html" class="navbar-brand">CampusHire</a>
+      <ul class="navbar-menu">
+        <li class="navbar-item"><a href="student_dashboard.html" class="active">Dashboard</a></li>
+        <li class="navbar-item"><a href="job_board.html">Browse Jobs</a></li>
+        <li class="navbar-item"><a href="student_applications.html">My Applications</a></li>
+      </ul>
+      <div class="navbar-right">
+        <div class="navbar-profile">
+          <img id="navProfilePic" class="navbar-profile-pic" src="https://via.placeholder.com/32" alt="Profile">
+          <span id="navStudentName">Student</span>
+        </div>
+        <button id="navLogoutBtn" class="navbar-logout-btn">Logout</button>
+      </div>
+    </div>
+  </nav>
+  <div class="dashboard-container">
+    <h1>Student Dashboard</h1>
+    <div class="dashboard-section">
+      <h3>Welcome, <span id="studentName">Student</span>!</h3>
+      <p class="small">Email: <span id="studentEmail"></span></p>
+    </div>
+    <div class="dashboard-section">
+      <h3>Profile</h3>
+      <div class="row">
+        <div class="col" style="max-width:140px;">
+          <img id="profileImage" src="https://via.placeholder.com/120" alt="Profile" width="120" height="120" style="border-radius:50%; border:2px solid #dfe7ff;">
+          <div style="margin-top:8px;">
+            <input type="file" id="profileImageInput" accept="image/*">
+          </div>
+        </div>
+        <div class="col">
+          <label for="aboutMe">About Me</label>
+          <textarea id="aboutMe" placeholder="Short bio — what makes you stand out?"></textarea>
+          <label for="skills">Skills (comma separated)</label>
+          <input id="skills" type="text" placeholder="e.g. HTML, CSS, JavaScript, Python">
+        </div>
+      </div>
+    </div>
+    <div class="dashboard-section">
+      <h3>Contact Information</h3>
+      <div class="row">
+        <div class="col">
+          <label for="phone">Phone</label>
+          <input id="phone" type="text" placeholder="+234 800 000 0000">
+        </div>
+        <div class="col">
+          <label for="linkedin">LinkedIn URL</label>
+          <input id="linkedin" type="text" placeholder="https://www.linkedin.com/in/yourname">
+        </div>
+        <div class="col">
+          <label for="github">GitHub URL</label>
+          <input id="github" type="text" placeholder="https://github.com/yourname">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="address">Address</label>
+          <input id="address" type="text" placeholder="City, State, Country">
+        </div>
+      </div>
+    </div>
+    <div class="dashboard-section">
+      <h3>Education</h3>
+      <div class="row">
+        <div class="col">
+          <label for="school">School / University</label>
+          <input id="school" type="text" placeholder="University of X">
+        </div>
+        <div class="col">
+          <label for="degree">Degree / Program</label>
+          <input id="degree" type="text" placeholder="BSc Computer Science">
+        </div>
+        <div class="col">
+          <label for="gradYear">Graduation Year</label>
+          <input id="gradYear" type="text" placeholder="e.g. 2026">
+        </div>
+        <div class="col">
+          <label for="gpa">GPA (optional)</label>
+          <input id="gpa" type="text" placeholder="e.g. 4.0 / 5.0">
+        </div>
+      </div>
+    </div>
+    <div class="dashboard-section">
+      <h3>Work Experience</h3>
+      <div class="row">
+        <div class="col">
+          <label for="company">Company</label>
+          <input id="company" type="text" placeholder="Company name (or internship org)">
+        </div>
+        <div class="col">
+          <label for="role">Role / Title</label>
+          <input id="role" type="text" placeholder="e.g. Frontend Intern">
+        </div>
+        <div class="col">
+          <label for="duration">Duration</label>
+          <input id="duration" type="text" placeholder="e.g. Jun 2023 - Aug 2023">
+        </div>
+      </div>
+      <label for="workDescription">Describe your role (short)</label>
+      <textarea id="workDescription" placeholder="Describe responsibilities, achievements"></textarea>
+    </div>
+    <div class="center">
+      <button id="saveProfileBtn">Save Profile</button>
+      <p id="profileStatus" class="small"></p>
+    </div>
+    <div class="dashboard-section">
+      <h3>CV Management</h3>
+      <div class="row">
+        <div class="col">
+          <label for="cvUpload">Upload CV</label>
+          <input id="cvUpload" type="file" accept=".pdf,.doc,.docx">
+        </div>
+        <div class="col" style="max-width:160px;">
+          <button id="uploadBtn">Upload</button>
+        </div>
+      </div>
+      <p id="uploadStatus" class="small"></p>
+      <div class="cv-list" id="cvList"></div>
+    </div>
+    <div class="center" style="margin-top:20px; margin-bottom:20px;">
+      <div class="btn-group">
+        <button class="secondary" onclick="window.location.href='job_board.html'">Browse Jobs</button>
+        <button class="secondary" onclick="window.location.href='student_applications.html'">View Applications</button>
+      </div>
+    </div>
+  </div>
+  <script src="js/navbar-toggle.js"></script>
+  <script type="module" src="js/student_dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My Applications | CampusHire</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="student_dashboard.html" class="navbar-brand">CampusHire</a>
+      <ul class="navbar-menu">
+        <li class="navbar-item"><a href="student_dashboard.html">Dashboard</a></li>
+        <li class="navbar-item"><a href="job_board.html">Browse Jobs</a></li>
+        <li class="navbar-item"><a href="student_applications.html" class="active">My Applications</a></li>
+      </ul>
+      <div class="navbar-right">
+        <div class="navbar-profile">
+          <img id="navProfilePic" class="navbar-profile-pic" src="https://via.placeholder.com/32" alt="Profile">
+          <span id="navStudentName">Student</span>
+        </div>
+        <button id="navLogoutBtn" class="navbar-logout-btn">Logout</button>
+      </div>
+    </div>
+  </nav>
+  <div class="dashboard-container">
+    <h1>My Applications</h1>
+    <p class="small">Track the status of all your job applications</p>
+    
+    <div class="dashboard-section">
+      <div id="myApplications">Loading...</div>
+    </div>
+  </div>
+
+  <script src="js/navbar-toggle.js"></script>
+  <script type="module" src="js/student_applications.js"></script>
+</body>
+</html>

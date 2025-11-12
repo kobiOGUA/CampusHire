@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Recruiter Dashboard | CampusHire</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="dashboard-container">
+    <h1>🏢 Recruiter Dashboard</h1>
+
+    <div class="user-info">
+      <p><b>Name:</b> <span id="recruiterName">Not set</span></p>
+      <p><b>Email:</b> <span id="recruiterEmail">Not set</span></p>
+      <p><b>Company:</b> <span id="companyNameDisplay">Not set</span></p>
+    </div>
+
+    <hr>
+
+    <h2>📝 Post a New Job</h2>
+    <div class="job-form">
+      <input type="text" id="jobTitle" placeholder="Job Title" />
+      <input type="text" id="companyName" placeholder="Company Name (optional)" />
+      <textarea id="jobDescription" placeholder="Job Description"></textarea>
+      <button id="postJobBtn">📢 Post Job</button>
+      <p id="jobStatus"></p>
+    </div>
+
+    <hr>
+
+    <h2>📋 My Posted Jobs</h2>
+    <div id="myJobs">Loading...</div>
+
+    <hr>
+
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <script type="module" src="js/recruiter_dashboard.js"></script>
+</body>
+</html>

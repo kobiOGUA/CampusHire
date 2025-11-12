@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports | Admin Dashboard | CampusHire</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="admin_dashboard.html" class="navbar-brand">CampusHire</a>
+      <ul class="navbar-menu">
+        <li class="navbar-item"><a href="admin_dashboard.html">Dashboard</a></li>
+        <li class="navbar-item"><a href="admin_manage_users.html">Manage Users</a></li>
+        <li class="navbar-item"><a href="admin_manage_jobs.html">Manage Jobs</a></li>
+        <li class="navbar-item"><a href="admin_reports.html" class="active">Reports</a></li>
+      </ul>
+      <div class="navbar-right">
+        <div class="navbar-profile">
+          <span id="navAdminName">Admin</span>
+        </div>
+        <button id="navLogoutBtn" class="navbar-logout-btn">Logout</button>
+      </div>
+    </div>
+  </nav>
+  <div class="dashboard-container">
+    <h1>Reports & Analytics</h1>
+
+    <!-- STATS OVERVIEW -->
+    <div class="stats">
+      <div class="card">
+        Total Students<br>
+        <b id="totalStudents">0</b>
+      </div>
+      <div class="card">
+        Total Recruiters<br>
+        <b id="totalRecruiters">0</b>
+      </div>
+      <div class="card">
+        Total Jobs<br>
+        <b id="totalJobs">0</b>
+      </div>
+      <div class="card">
+        Total Applications<br>
+        <b id="totalApplications">0</b>
+      </div>
+    </div>
+
+    <!-- JOB STATISTICS -->
+    <div class="dashboard-section">
+      <h3>Job Statistics</h3>
+      <div class="row">
+        <div class="col">
+          <p><b>Active Jobs:</b> <span id="activeJobs">0</span></p>
+          <p><b>Closed Jobs:</b> <span id="closedJobs">0</span></p>
+        </div>
+        <div class="col">
+          <p><b>Average Applications per Job:</b> <span id="avgApplications">0</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- APPLICATION STATUS BREAKDOWN -->
+    <div class="dashboard-section">
+      <h3>Application Status Breakdown</h3>
+      <div class="row">
+        <div class="col">
+          <p><b>Pending:</b> <span id="pendingApps">0</span></p>
+          <p><b>Shortlisted:</b> <span id="shortlistedApps">0</span></p>
+        </div>
+        <div class="col">
+          <p><b>Contacted:</b> <span id="contactedApps">0</span></p>
+          <p><b>Rejected:</b> <span id="rejectedApps">0</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP RECRUITERS -->
+    <div class="dashboard-section">
+      <h3>Top Recruiters</h3>
+      <div id="topRecruiters">Loading...</div>
+    </div>
+
+    <!-- TOP JOBS -->
+    <div class="dashboard-section">
+      <h3>Most Applied Jobs</h3>
+      <div id="topJobs">Loading...</div>
+    </div>
+
+    <!-- REPORT GENERATOR -->
+    <div class="dashboard-section">
+      <h3>Generate Custom Report</h3>
+      <div class="row">
+        <div class="col">
+          <label for="reportType">Report Type</label>
+          <select id="reportType">
+            <option value="">Select Report Type</option>
+            <option value="general">General Site Analytics</option>
+            <option value="company">Company Report</option>
+            <option value="recruiter">Recruiter Report</option>
+            <option value="student">Student Report</option>
+          </select>
+        </div>
+        <div class="col" id="filterCol" style="display:none;">
+          <label for="reportFilter">Select Target</label>
+          <select id="reportFilter">
+            <option value="">Loading...</option>
+          </select>
+        </div>
+        <div class="col" style="max-width:180px;">
+          <label>&nbsp;</label>
+          <button id="generateReportBtn">Generate Report</button>
+        </div>
+      </div>
+      <div id="reportOutput" style="margin-top:16px;"></div>
+    </div>
+
+    <div class="center" style="margin-top:20px; margin-bottom:20px;">
+      <button class="secondary" onclick="window.location.href='admin_dashboard.html'">Back to Dashboard</button>
+    </div>
+  </div>
+
+  <script src="js/navbar-toggle.js"></script>
+  <script type="module" src="js/admin_reports.js"></script>
+</body>
+</html>

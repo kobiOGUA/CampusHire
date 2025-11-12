@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Recruiter Dashboard | CampusHire</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="recruiter_dashboard.html" class="navbar-brand">CampusHire</a>
+      <ul class="navbar-menu">
+        <li class="navbar-item"><a href="recruiter_dashboard.html" class="active">Dashboard</a></li>
+        <li class="navbar-item"><a href="recruiter_view_jobs.html">View Applicants</a></li>
+      </ul>
+      <div class="navbar-right">
+        <div class="navbar-profile">
+          <span id="navRecruiterName">Recruiter</span>
+        </div>
+        <button id="navLogoutBtn" class="navbar-logout-btn">Logout</button>
+      </div>
+    </div>
+  </nav>
+  <div class="dashboard-container">
+    <h1>Recruiter Dashboard</h1>
+
+    <!-- WELCOME SECTION -->
+    <div class="dashboard-section">
+      <h3>Welcome</h3>
+      <div class="row">
+        <div class="col">
+          <p><b>Name:</b> <span id="recruiterName">Not set</span></p>
+          <p><b>Email:</b> <span id="recruiterEmail">Not set</span></p>
+        </div>
+        <div class="col">
+          <p><b>Company:</b> <span id="companyNameDisplay">Not set</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST JOB SECTION -->
+    <div class="dashboard-section">
+      <h3>Post a New Job</h3>
+      <form class="job-form">
+        <div class="row">
+          <div class="col">
+            <label for="jobTitle">Job Title</label>
+            <input type="text" id="jobTitle" placeholder="e.g. Senior Frontend Developer" />
+          </div>
+          <div class="col">
+            <label for="companyName">Company Name</label>
+            <input type="text" id="companyName" placeholder="Your company name" />
+          </div>
+        </div>
+
+        <label for="jobDescription">Job Description</label>
+        <textarea id="jobDescription" placeholder="Describe the role, requirements, and benefits..."></textarea>
+
+        <button type="button" id="postJobBtn">Post Job</button>
+        <p id="jobStatus" class="small"></p>
+      </form>
+    </div>
+
+    <!-- MY POSTED JOBS SECTION -->
+    <div class="dashboard-section">
+      <h3>My Posted Jobs</h3>
+      <div id="myJobs">Loading...</div>
+    </div>
+
+    <!-- NAVIGATION SECTION -->
+    <div class="center" style="margin-top:20px; margin-bottom:20px;">
+      <div class="btn-group">
+        <button class="secondary" onclick="window.location.href='recruiter_view_jobs.html'">View Applicants</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/navbar-toggle.js"></script>
+  <script type="module" src="js/recruiter_dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusHire | Job Board</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="student_dashboard.html" class="navbar-brand">CampusHire</a>
+      <ul class="navbar-menu">
+        <li class="navbar-item"><a href="student_dashboard.html">Dashboard</a></li>
+        <li class="navbar-item"><a href="job_board.html" class="active">Browse Jobs</a></li>
+      </ul>
+      <div class="navbar-right">
+        <div class="navbar-profile">
+          <img id="navProfilePic" class="navbar-profile-pic" src="https://via.placeholder.com/32" alt="Profile">
+          <span id="navStudentName">Student</span>
+        </div>
+        <button id="navLogoutBtn" class="navbar-logout-btn">Logout</button>
+      </div>
+    </div>
+  </nav>
+  <div class="dashboard-container">
+    <h1>Job Board</h1>
+
+    <!-- Search + Filters -->
+    <div class="dashboard-section">
+      <h3>Search & Filter</h3>
+      <div class="row">
+        <div class="col">
+          <label for="searchInput">Search jobs or companies</label>
+          <input type="text" id="searchInput" placeholder="Search..." />
+        </div>
+        <div class="col">
+          <label for="companyFilter">Company</label>
+          <select id="companyFilter">
+            <option value="">All Companies</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="sortFilter">Sort by</label>
+          <select id="sortFilter">
+            <option value="recent">Most Recent</option>
+            <option value="oldest">Oldest First</option>
+          </select>
+        </div>
+        <div class="col" style="max-width:140px;">
+          <label>&nbsp;</label>
+          <button id="searchBtn">Search</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Job Results -->
+    <div class="dashboard-section">
+      <h3>Available Positions</h3>
+      <div id="jobList">Loading jobs...</div>
+    </div>
+  </div>
+
+  <script src="js/navbar-toggle.js"></script>
+  <script type="module" src="js/job_board.js"></script>
+</body>
+</html>

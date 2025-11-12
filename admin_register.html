@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Registration | CampusHire</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+  <div id="animated-bg"></div>
+
+  <main class="auth-page">
+    <div class="auth-card container">
+      <h2>Admin Registration</h2>
+      <form id="adminRegisterForm" class="auth-form">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Full name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="admin@campus hire.com" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Password" required>
+
+        <button type="submit">Create Admin Account</button>
+      </form>
+      <p id="statusMsg" class="small center" style="margin-top:12px;"></p>
+    </div>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      getDocs,
+      collection,
+      query,
+      where
+    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+    // 🔹 Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyA5milUoYfNSMhif0JA7dbw26tyfs2fDpQ",
+      authDomain: "campushire-d0dd8.firebaseapp.com",
+      projectId: "campushire-d0dd8",
+      storageBucket: "campushire-d0dd8.appspot.com",
+      messagingSenderId: "448246002591",
+      appId: "1:448246002591:web:098670b92661a0a3a283aa",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("adminRegisterForm");
+    const statusMsg = document.getElementById("statusMsg");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      statusMsg.textContent = "Creating admin account...";
+
+      try {
+        // Check if an admin already exists
+        const adminCheck = await getDocs(query(collection(db, "users"), where("role", "==", "admin")));
+        if (!adminCheck.empty) {
+          statusMsg.textContent = "Error: An admin account already exists.";
+          return;
+        }
+
+        // Create new admin
+        const { user } = await createUserWithEmailAndPassword(auth, email, password);
+        await setDoc(doc(db, "users", user.uid), {
+          name,
+          email,
+          role: "admin",
+          about: "System Administrator",
+          companyName: "CampusHire HQ",
+          skills: ""
+        });
+
+        statusMsg.textContent = "Success: Admin account created!";
+        setTimeout(() => (window.location.href = "login.html"), 1500);
+      } catch (err) {
+        console.error(err);
+        statusMsg.textContent = "Error: " + err.message;
+      }
+    });
+  </script>
+</body>
+</html>

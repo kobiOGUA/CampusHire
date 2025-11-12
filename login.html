@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - CampusHire</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+  <div id="animated-bg"></div>
+
+  <main class="auth-page">
+    <div class="auth-card container">
+      <h2>Sign in</h2>
+
+      <form id="loginForm" class="auth-form">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="you@school.edu" required>
+
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+
+        <button type="submit">Login</button>
+      </form>
+
+      <p class="center small">Don't have an account? <a href="register.html">Create one</a></p>
+    </div>
+  </main>
+
+  <script type="module" src="js/animated_bg.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>
