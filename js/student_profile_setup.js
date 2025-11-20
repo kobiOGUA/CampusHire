@@ -43,6 +43,11 @@ const schoolInput = document.getElementById("school");
 const degreeInput = document.getElementById("degree");
 const gradYearInput = document.getElementById("gradYear");
 
+// Profile image elements (make sure these exist in your HTML)
+const profileImageInput = document.getElementById("profileImage"); // <input type="file" id="profileImage">
+const profileImagePreview = document.getElementById("profileImagePreview"); // <img id="profileImagePreview">
+
+let profileImageBase64 = ""; // will store dataURL
 let currentUser = null;
 
 // Auth check
@@ -70,6 +75,54 @@ async function loadExistingProfile() {
     schoolInput.value = data.school || "";
     degreeInput.value = data.degree || "";
     gradYearInput.value = data.gradYear || "";
+
+    // Load profile image preview if stored as base64 data URL
+    if (data.profileImage) {
+      profileImageBase64 = data.profileImage;
+      if (profileImagePreview) {
+        profileImagePreview.src = profileImageBase64;
+      }
+    }
+  }
+}
+
+// Convert selected file to base64 dataURL
+if (profileImageInput) {
+  profileImageInput.addEventListener("change", (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    // Optional: enforce a file-size limit (e.g., 1.5MB) to avoid huge strings in Firestore
+    const maxBytes = 1.5 * 1024 * 1024;
+    if (file.size > maxBytes) {
+      statusMsg.textContent = "Image too large. Please choose an image under 1.5MB.";
+      statusMsg.className = "status-msg error";
+      profileImageInput.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (readerEvent) {
+      const dataURL = readerEvent.target.result;
+      profileImageBase64 = dataURL; // full data URL (e.g., "data:image/png;base64,....")
+      if (profileImagePreview) {
+        profileImagePreview.src = profileImageBase64;
+      }
+      statusMsg.textContent = "";
+    };
+    reader.onerror = function () {
+      statusMsg.textContent = "Failed to read image file.";
+      statusMsg.className = "status-msg error";
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Optional: click preview to open file picker
+  if (profileImagePreview) {
+    profileImagePreview.style.cursor = "pointer";
+    profileImagePreview.addEventListener("click", () => {
+      profileImageInput.click();
+    });
   }
 }
 
@@ -84,6 +137,8 @@ function calculateProgress() {
     schoolInput.value.trim(),
     degreeInput.value.trim(),
     gradYearInput.value.trim(),
+    // count profile image as a filled field if present
+    profileImageBase64 ? "hasImage" : "",
   ];
   
   const filled = fields.filter(f => f.length > 0).length;
@@ -106,19 +161,22 @@ function updateProgress() {
 
 function updateSectionIcon(iconId, fieldValue) {
   const icon = document.getElementById(iconId);
-  if (fieldValue) {
-    icon.textContent = "✓";
-    icon.style.color = "var(--success)";
-  } else {
-    icon.textContent = "○";
-    icon.style.color = "var(--muted)";
+  if (icon) {
+    if (fieldValue) {
+      icon.textContent = "✓";
+      icon.style.color = "var(--success)";
+    } else {
+      icon.textContent = "○";
+      icon.style.color = "var(--muted)";
+    }
   }
 }
 
 // Listen for input changes
 [aboutInput, skillsInput, phoneInput, linkedinInput, githubInput, schoolInput, degreeInput, gradYearInput].forEach(input => {
-  input.addEventListener("input", updateProgress);
+  if (input) input.addEventListener("input", updateProgress);
 });
+if (profileImageInput) profileImageInput.addEventListener("change", updateProgress);
 
 // Save profile
 profileSetupForm.addEventListener("submit", async (e) => {
@@ -140,6 +198,11 @@ profileSetupForm.addEventListener("submit", async (e) => {
     profileSetupComplete: true,
     profileSetupCompletedAt: new Date().toISOString(),
   };
+
+  // Include profileImage if available
+  if (profileImageBase64) {
+    data.profileImage = profileImageBase64;
+  }
 
   try {
     await setDoc(doc(db, "users", currentUser.uid), data, { merge: true });
