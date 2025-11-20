@@ -125,6 +125,26 @@ async function loadStudentInfo() {
 }
 
 // ---------------------------
+// PROFILE PICTURE UPLOAD
+profileInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("Please select a valid image file.");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    const base64Image = event.target.result;
+    profileImage.src = base64Image;
+    navProfilePic.src = base64Image;
+  };
+  reader.readAsDataURL(file);
+});
+
+// ---------------------------
 // SAVE PROFILE
 saveProfileBtn.addEventListener("click", async () => {
   if (!currentUser) return;
@@ -133,7 +153,7 @@ saveProfileBtn.addEventListener("click", async () => {
   const data = {
     aboutMe: aboutInput.value.trim(),
     skills: skillsInput.value.trim(),
-    profilePicBase64: profileImage.src,
+    profilePicBase64: profileImage.src.startsWith("data:") ? profileImage.src : "",
     phone: phoneInput.value.trim(),
     linkedin: linkedinInput.value.trim(),
     github: githubInput.value.trim(),
