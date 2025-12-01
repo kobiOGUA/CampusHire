@@ -77,11 +77,12 @@ async function loadExistingProfile() {
     gradYearInput.value = data.gradYear || "";
 
     // Load profile image preview if stored as base64 data URL
-    if (data.profileImage) {
-      profileImageBase64 = data.profileImage;
+    if (data.profilePicBase64) {
+      profileImageBase64 = data.profilePicBase64;
       if (profileImagePreview) {
         profileImagePreview.src = profileImageBase64;
       }
+      updateSectionIcon("image-icon", "hasImage");
     }
   }
 }
@@ -108,7 +109,10 @@ if (profileImageInput) {
       if (profileImagePreview) {
         profileImagePreview.src = profileImageBase64;
       }
-      statusMsg.textContent = "";
+      updateSectionIcon("image-icon", "hasImage");
+      updateProgress();
+      statusMsg.textContent = "Image loaded. Don't forget to save!";
+      statusMsg.className = "status-msg success";
     };
     reader.onerror = function () {
       statusMsg.textContent = "Failed to read image file.";
@@ -140,7 +144,7 @@ function calculateProgress() {
     // count profile image as a filled field if present
     profileImageBase64 ? "hasImage" : "",
   ];
-  
+
   const filled = fields.filter(f => f.length > 0).length;
   const total = fields.length;
   return Math.round((filled / total) * 100);
@@ -201,14 +205,14 @@ profileSetupForm.addEventListener("submit", async (e) => {
 
   // Include profileImage if available
   if (profileImageBase64) {
-    data.profileImage = profileImageBase64;
+    data.profilePicBase64 = profileImageBase64;
   }
 
   try {
     await setDoc(doc(db, "users", currentUser.uid), data, { merge: true });
     statusMsg.textContent = "Profile saved successfully!";
     statusMsg.className = "status-msg success";
-    
+
     setTimeout(() => {
       window.location.href = "student_dashboard.html";
     }, 1500);
@@ -227,7 +231,7 @@ skipBtn.addEventListener("click", async () => {
       profileSetupComplete: true,
       profileSetupSkippedAt: new Date().toISOString(),
     }, { merge: true });
-    
+
     window.location.href = "student_dashboard.html";
   } catch (err) {
     console.error("Error marking setup as skipped:", err);

@@ -240,6 +240,14 @@ button.secondary:hover,
   margin-top: 1rem;
 }
 
+.center {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

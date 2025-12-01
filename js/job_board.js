@@ -54,15 +54,18 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   currentUser = user;
-  
+
   // Setup navbar
   const { doc, getDoc } = await import("https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js");
   const userSnap = await getDoc(doc(db, "users", user.uid));
   if (userSnap.exists()) {
     const userData = userSnap.data();
     navStudentName.textContent = userData.name || user.displayName || "";
+    if (userData.profilePicBase64) {
+      navProfilePic.src = userData.profilePicBase64;
+    }
   }
-  
+
   await loadApplications();
   await loadJobs();
 });
@@ -143,10 +146,9 @@ function displayJobs(jobs) {
       <b>${job.title}</b> at ${job.company}<br>
       <small>${job.description}</small><br>
       <small>Posted: ${new Date(job.datePosted).toLocaleDateString()}</small><br>
-      ${
-        disabled
-          ? `<button disabled style="background:#aaa;">${statusText}</button>`
-          : `<button onclick="applyJob('${job.id}', '${job.recruiterId}', '${job.title}', '${job.company}')">Apply</button>`
+      ${disabled
+        ? `<button disabled style="background:#aaa;">${statusText}</button>`
+        : `<button onclick="applyJob('${job.id}', '${job.recruiterId}', '${job.title}', '${job.company}')">Apply</button>`
       }
       <hr>
     `;

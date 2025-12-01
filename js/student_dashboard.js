@@ -73,13 +73,13 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
   currentUser = user;
-  
+
   // Check if profile setup is complete
   const userRef = doc(db, "users", user.uid);
   const userSnap = await getDoc(userRef);
-  
+
   // No forced redirect to profile setup — proceed to load profile normally.
-  
+
   // Read name from Firestore (where it was saved during registration)
   if (userSnap.exists()) {
     const userData = userSnap.data();
@@ -132,6 +132,12 @@ profileInput.addEventListener("change", (e) => {
 
   if (!file.type.startsWith("image/")) {
     alert("Please select a valid image file.");
+    return;
+  }
+
+  // Check file size (max 800KB)
+  if (file.size > 800 * 1024) {
+    alert("Image is too large. Please select an image under 800KB.");
     return;
   }
 

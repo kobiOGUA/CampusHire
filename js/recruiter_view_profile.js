@@ -33,13 +33,39 @@ const statusMsg = document.getElementById("statusMsg");
 
 console.log("✅ Recruiter view loaded with:", { studentId, jobId });
 
-// -----------------------------
-// 🧭 Load student profile
-// -----------------------------
-if (!studentId || studentId === "undefined" || studentId === "null") {
-  container.textContent = "❌ No student ID provided in URL.";
-} else {
-  loadProfile();
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+const auth = getAuth(app);
+const navRecruiterName = document.getElementById("navRecruiterName");
+const navLogoutBtn = document.getElementById("navLogoutBtn");
+
+// Auth Check
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  // Load recruiter name for navbar
+  const userSnap = await getDoc(doc(db, "users", user.uid));
+  if (userSnap.exists()) {
+    navRecruiterName.textContent = userSnap.data().name || "Recruiter";
+  }
+
+  // Load student profile
+  if (!studentId || studentId === "undefined" || studentId === "null") {
+    container.textContent = "❌ No student ID provided in URL.";
+  } else {
+    loadProfile();
+  }
+});
+
+// Logout
+if (navLogoutBtn) {
+  navLogoutBtn.addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "login.html";
+  });
 }
 
 async function loadProfile() {
@@ -83,26 +109,22 @@ async function loadProfile() {
       <h3>${d.name || "Unnamed Student"}</h3>
       <p><b>Email:</b> ${d.email || "N/A"}</p>
       <p><b>Phone:</b> ${d.phone || "N/A"}</p>
-      <p><b>LinkedIn:</b> ${
-        d.linkedin ? `<a href="${d.linkedin}" target="_blank">${d.linkedin}</a>` : "N/A"
+      <p><b>LinkedIn:</b> ${d.linkedin ? `<a href="${d.linkedin}" target="_blank">${d.linkedin}</a>` : "N/A"
       }</p>
-      <p><b>GitHub:</b> ${
-        d.github ? `<a href="${d.github}" target="_blank">${d.github}</a>` : "N/A"
+      <p><b>GitHub:</b> ${d.github ? `<a href="${d.github}" target="_blank">${d.github}</a>` : "N/A"
       }</p>
       <p><b>Address:</b> ${d.address || "N/A"}</p>
       <hr>
-      <p><b>Education:</b> ${d.degree || "N/A"} at ${d.school || "N/A"} (${d.gradYear || ""}) GPA: ${
-      d.gpa || "N/A"
-    }</p>
+      <p><b>Education:</b> ${d.degree || "N/A"} at ${d.school || "N/A"} (${d.gradYear || ""}) GPA: ${d.gpa || "N/A"
+      }</p>
       <p><b>Experience:</b> ${d.role || "N/A"} at ${d.company || "N/A"} (${d.duration || "N/A"})</p>
       <p>${d.workDescription || ""}</p>
       <p><b>Skills:</b> ${d.skills || "N/A"}</p>
       <p><b>About:</b> ${d.aboutMe || "N/A"}</p>
       <p>${cvLink ? `<a href="${cvLink}" target="_blank">📄 View CV</a>` : "No CV uploaded"}</p>
       <hr>
-      ${
-        jobId
-          ? `
+      ${jobId
+        ? `
         <label>Status: </label>
         <select id="statusSelect">
           <option value="Pending">Pending</option>
@@ -112,7 +134,7 @@ async function loadProfile() {
         </select>
         <button id="updateBtn">Update Status</button>
       `
-          : "<p><i>No job selected — status unavailable.</i></p>"
+        : "<p><i>No job selected — status unavailable.</i></p>"
       }
     `;
 
@@ -151,9 +173,4 @@ async function loadProfile() {
   }
 }
 
-// -----------------------------
-// 🔙 Back to recruiter dashboard
-// -----------------------------
-document.getElementById("backBtn").addEventListener("click", () => {
-  window.location.href = "recruiter_dashboard.html";
-});
+
