@@ -3,26 +3,31 @@
 // ===============================
 // This script adds mobile hamburger menu functionality to all pages
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const navbar = document.querySelector(".navbar");
   if (!navbar) return;
 
   const container = document.querySelector(".navbar-container");
   const menu = document.querySelector(".navbar-menu");
-  
+
   if (!container || !menu) return;
 
-  // Create hamburger toggle button
-  const toggle = document.createElement("button");
-  toggle.className = "navbar-toggle";
-  toggle.innerHTML = "☰";
-  toggle.setAttribute("aria-label", "Toggle menu");
-  toggle.setAttribute("aria-expanded", "false");
+  // Check if toggle already exists
+  let toggle = document.querySelector(".navbar-toggle");
 
-  // Insert toggle after brand
-  const brand = document.querySelector(".navbar-brand");
-  if (brand) {
-    brand.after(toggle);
+  if (!toggle) {
+    // Create hamburger toggle button if it doesn't exist
+    toggle = document.createElement("button");
+    toggle.className = "navbar-toggle";
+    toggle.innerHTML = "☰";
+    toggle.setAttribute("aria-label", "Toggle menu");
+    toggle.setAttribute("aria-expanded", "false");
+
+    // Insert toggle after brand
+    const brand = document.querySelector(".navbar-brand");
+    if (brand) {
+      brand.after(toggle);
+    }
   }
 
   // Toggle menu on click

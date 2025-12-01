@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,11 +9,15 @@
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/dashboard.css">
 </head>
+
 <body>
   <nav class="navbar">
     <div class="navbar-container">
-      <a href="student_dashboard.html" class="navbar-brand">CampusHire</a>
-      <ul class="navbar-menu">
+      <a href="student_dashboard.html" class="navbar-brand">
+        <span>CampusHire</span>
+      </a>
+      <button class="navbar-toggle" id="navbar-toggle">☰</button>
+      <ul class="navbar-menu" id="navbar-menu">
         <li class="navbar-item"><a href="student_dashboard.html" class="active">Dashboard</a></li>
         <li class="navbar-item"><a href="job_board.html">Browse Jobs</a></li>
         <li class="navbar-item"><a href="student_applications.html">My Applications</a></li>
@@ -36,7 +41,8 @@
       <h3>Profile</h3>
       <div class="row">
         <div class="col" style="max-width:140px;">
-          <img id="profileImage" src="https://via.placeholder.com/120" alt="Profile" width="120" height="120" style="border-radius:50%; border:2px solid #dfe7ff;">
+          <img id="profileImage" src="https://via.placeholder.com/120" alt="Profile" width="120" height="120"
+            style="border-radius:50%; border:2px solid #dfe7ff;">
           <div style="margin-top:8px;">
             <input type="file" id="profileImageInput" accept="image/*">
           </div>
@@ -140,4 +146,5 @@
   <script src="js/navbar-toggle.js"></script>
   <script type="module" src="js/student_dashboard.js"></script>
 </body>
+
 </html>

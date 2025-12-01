@@ -1,105 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CampusHire - Student Job Portal</title>
+  <title>CampusHire - Premium Student Job Portal</title>
   <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/index.css">
 </head>
+
 <body>
-  <div id="animated-bg"></div>
+  <!-- Premium Navbar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <span>CampusHire</span>
+      </a>
+      <button class="navbar-toggle" id="navbar-toggle">☰</button>
+      <ul class="navbar-menu" id="navbar-menu">
+        <li class="navbar-item"><a href="index.html" class="active">Home</a></li>
+        <li class="navbar-item"><a href="job_board.html">Jobs</a></li>
+        <li class="navbar-item"><a href="#">Companies</a></li>
+        <li class="navbar-item"><a href="#">About Us</a></li>
+      </ul>
+      <div class="navbar-right">
+        <button class="secondary" onclick="window.location.href='login.html'">Login</button>
+        <button class="primary" onclick="window.location.href='register.html'">Sign Up</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Animated Background -->
+  <script type="module" src="js/animated_bg.js"></script>
 
   <main class="hero">
     <div class="hero-inner">
       <div class="hero-text">
-        <h1>CampusHire</h1>
-        <p class="subtitle">Online Campus Recruitment System</p>
-        
+        <h1>Launch Your Career <br><span class="text-gradient">While You Study</span></h1>
+        <p class="subtitle">The ultimate platform connecting ambitious students with top-tier opportunities.</p>
+        <p>Discover internships, part-time roles, and graduate programs tailored to your field of study. Build your
+          professional identity today.</p>
 
         <div class="hero-actions">
-          <button onclick="window.location.href='login.html'">Login</button>
-          <button class="secondary" onclick="window.location.href='register.html'">Register</button>
+          <button class="primary" onclick="window.location.href='register.html'">Get Started</button>
+          <button class="secondary" onclick="window.location.href='job_board.html'">Browse Jobs</button>
         </div>
       </div>
 
-      <aside class="hero-info">
-        <h3>Welcome to CampusHire</h3>
-        <p>The premier platform connecting students with career opportunities in their fields of interest.</p>
-        <p><b>What you can do:</b></p>
+      <div class="hero-info card">
+        <h3>Why CampusHire?</h3>
         <ul>
-          <li>Browse curated job listings and internships</li>
-          <li>Build and showcase your professional profile</li>
-          <li>Upload and manage your CV</li>
-          <li>Track your applications in real-time</li>
-          <li>Get discovered by top recruiters</li>
+          <li>Access exclusive student-focused listings</li>
+          <li>Create a stunning digital CV in minutes</li>
+          <li>Direct connection with campus recruiters</li>
+          <li>Real-time application tracking</li>
+          <li>Skill-based matching algorithm</li>
         </ul>
-      </aside>
+      </div>
     </div>
   </main>
 
-  <!-- Inline animated background for immediate visibility on index (non-module, runs on file:// too) -->
   <script>
-  (function(){
-    try{
-      if(document.getElementById('bg-canvas')) return;
-      const canvas = document.createElement('canvas');
-      canvas.id = 'bg-canvas';
-      canvas.style.position = 'fixed';
-      canvas.style.left = '0';
-      canvas.style.top = '0';
-      canvas.style.width = '100%';
-      canvas.style.height = '100%';
-      canvas.style.zIndex = '-1';
-      canvas.style.pointerEvents = 'none';
-      canvas.style.opacity = '0.9';
-      document.body.appendChild(canvas);
-      const ctx = canvas.getContext('2d');
-      let DPR = window.devicePixelRatio || 1;
-      let w=0,h=0;
-      function resize(){
-        DPR = window.devicePixelRatio || 1;
-        w = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-        h = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-        canvas.width = Math.floor(w * DPR);
-        canvas.height = Math.floor(h * DPR);
-        canvas.style.width = w + 'px';
-        canvas.style.height = h + 'px';
-        ctx.setTransform(DPR,0,0,DPR,0,0);
-      }
-      window.addEventListener('resize', resize, {passive:true});
-      resize();
-      const blobs = [];
-      const BLOBS = 5;
-      for(let i=0;i<BLOBS;i++) blobs.push({x:Math.random()*w,y:Math.random()*h,r:120+Math.random()*160,vx:(Math.random()-0.5)*0.2,vy:(Math.random()-0.5)*0.2,hue:200+Math.floor(Math.random()*40)});
-      let mouseX = w/2, mouseY = h/2; let lastMove = Date.now();
-      window.addEventListener('pointermove', (e)=>{mouseX=e.clientX;mouseY=e.clientY;lastMove=Date.now();},{passive:true});
-      function draw(){
-        ctx.clearRect(0,0,w,h);
-        const g = ctx.createLinearGradient(0,0,w,h);
-        g.addColorStop(0,'rgba(11,108,255,0.03)');g.addColorStop(1,'rgba(6,34,102,0.02)');
-        ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
-        for(let i=0;i<blobs.length;i++){
-          const b = blobs[i];
-          const dx = mouseX - b.x; const dy = mouseY - b.y;
-          b.vx += dx * 0.00012; b.vy += dy * 0.00012; b.vx *= 0.995; b.vy *= 0.995; b.x += b.vx; b.y += b.vy;
-          if(b.x < -b.r) b.x = w + b.r; if(b.x > w + b.r) b.x = -b.r; if(b.y < -b.r) b.y = h + b.r; if(b.y > h + b.r) b.y = -b.r;
-          const gradient = ctx.createRadialGradient(b.x,b.y,b.r*0.1,b.x,b.y,b.r);
-          gradient.addColorStop(0, `hsla(${b.hue},80%,60%,0.12)`);
-          gradient.addColorStop(0.4, `hsla(${b.hue},70%,55%,0.06)`);
-          gradient.addColorStop(1, `hsla(${b.hue},60%,45%,0)`);
-          ctx.beginPath(); ctx.fillStyle = gradient; ctx.arc(b.x,b.y,b.r,0,Math.PI*2); ctx.fill();
-        }
-        const age = Date.now() - lastMove; if(age < 2000){ const mGrad = ctx.createRadialGradient(mouseX,mouseY,0,mouseX,mouseY,280); mGrad.addColorStop(0,'rgba(11,108,255,0.06)'); mGrad.addColorStop(1,'rgba(11,108,255,0)'); ctx.fillStyle = mGrad; ctx.fillRect(mouseX-280,mouseY-280,560,560); }
-        requestAnimationFrame(draw);
-      }
-      for(let i=0;i<blobs.length;i++){ blobs[i].vx += (Math.random()-0.5)*0.8; blobs[i].vy += (Math.random()-0.5)*0.6; }
-      // respect reduced motion
-      if(!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) requestAnimationFrame(draw);
-    }catch(e){console.warn('animated bg failed', e)}
-  })();
+    // Simple mobile toggle script
+    const toggle = document.getElementById('navbar-toggle');
+    const menu = document.getElementById('navbar-menu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
+      });
+    }
   </script>
-
-  <script type="module" src="js/app.js"></script>
 </body>
+
 </html>

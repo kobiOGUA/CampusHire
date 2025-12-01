@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,17 @@
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/dashboard.css">
 </head>
+
 <body>
   <nav class="navbar">
     <div class="navbar-container">
-      <a href="recruiter_dashboard.html" class="navbar-brand">CampusHire</a>
-      <ul class="navbar-menu">
+      <a href="recruiter_dashboard.html" class="navbar-brand">
+        <span>CampusHire</span>
+      </a>
+      <button class="navbar-toggle" id="navbar-toggle">☰</button>
+      <ul class="navbar-menu" id="navbar-menu">
         <li class="navbar-item"><a href="recruiter_dashboard.html">Dashboard</a></li>
-        <li class="navbar-item"><a href="recruiter_view_jobs.html" class="active">View Applicants</a></li>
+        <li class="navbar-item"><a href="recruiter_view_jobs.html" class="active">My Jobs</a></li>
       </ul>
       <div class="navbar-right">
         <div class="navbar-profile">
@@ -35,4 +40,5 @@
   <script src="js/navbar-toggle.js"></script>
   <script type="module" src="js/recruiter_applicants.js"></script>
 </body>
+
 </html>
