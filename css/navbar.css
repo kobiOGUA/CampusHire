@@ -173,7 +173,16 @@
   }
 
   .navbar-right {
+    display: flex;
+    /* Show navbar-right but hide its content except theme toggle */
+  }
+
+  .navbar-right>*:not(#theme-toggle-btn) {
     display: none;
-    /* Hide profile on mobile nav for simplicity or move to menu */
+  }
+
+  /* Ensure theme toggle is visible */
+  #theme-toggle-btn {
+    display: flex !important;
   }
 }
